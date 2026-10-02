@@ -25,13 +25,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  function unlockAndPlayAudio() {
+  function unmuteAndPlay() {
     if (!weddingAudio) return;
 
     weddingAudio.muted = false;
     weddingAudio.volume = 1.0;
 
-    // Web Audio API context resume for iOS WebKit Safari
     const AudioCtx = window.AudioContext || window.webkitAudioContext;
     if (AudioCtx) {
       try {
@@ -52,8 +51,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (promise !== undefined) {
       promise.then(() => {
         updateAudioUI(true);
-      }).catch((err) => {
-        // iOS Safari fallback: play muted then unmute
+      }).catch(() => {
+        // Fallback for strict browser policies
         weddingAudio.muted = true;
         weddingAudio.play().then(() => {
           weddingAudio.muted = false;
@@ -62,13 +61,15 @@ document.addEventListener('DOMContentLoaded', () => {
           updateAudioUI(false);
         });
       });
+    } else {
+      updateAudioUI(true);
     }
   }
 
   function toggleAudio() {
     if (!weddingAudio) return;
-    if (weddingAudio.paused) {
-      unlockAndPlayAudio();
+    if (weddingAudio.paused || weddingAudio.muted) {
+      unmuteAndPlay();
     } else {
       weddingAudio.pause();
       updateAudioUI(false);
@@ -84,19 +85,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Attempt initial playback & listen to user gesture vectors (essential for iOS Safari)
-  unlockAndPlayAudio();
-  window.addEventListener('load', unlockAndPlayAudio);
+  // 1. Start muted playback IMMEDIATELY as page opens
+  if (weddingAudio) {
+    weddingAudio.muted = true;
+    weddingAudio.play().catch(() => {});
+  }
 
+  // 2. Unmute & play audio on ANY initial gesture (touch/click/tap)
   const handleUserGesture = () => {
-    if (weddingAudio && weddingAudio.paused) {
-      unlockAndPlayAudio();
-    }
+    unmuteAndPlay();
   };
 
-  ['touchstart', 'touchend', 'click', 'pointerdown', 'keydown'].forEach((evtName) => {
-    window.addEventListener(evtName, handleUserGesture, { passive: false });
-    document.addEventListener(evtName, handleUserGesture, { passive: false });
+  ['touchstart', 'touchend', 'click', 'pointerdown', 'scroll', 'keydown'].forEach((evtName) => {
+    window.addEventListener(evtName, handleUserGesture, { passive: true });
+    document.addEventListener(evtName, handleUserGesture, { passive: true });
   });
 
   /* --------------------------------------------------------------------------
@@ -116,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
       glanceOverlay.addEventListener(evt, () => {
         clearTimeout(glanceTimer);
         dismissGlance();
-        unlockAndPlayAudio();
+        unmuteAndPlay();
       }, { passive: false });
     });
   }
@@ -131,7 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const handleOpen = (e) => {
       openingOverlay.classList.add('opened');
       document.body.style.overflow = '';
-      unlockAndPlayAudio();
+      unmuteAndPlay();
       
       const heroEl = document.getElementById('hero');
       if (heroEl) {

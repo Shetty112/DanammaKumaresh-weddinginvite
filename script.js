@@ -305,23 +305,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (!name || !message) return;
 
-      // Save to localStorage
+      // Save wish locally
       try {
         const savedWishes = JSON.parse(localStorage.getItem('weddingWishes') || '[]');
         savedWishes.push({ name, message, timestamp: new Date().toISOString() });
         localStorage.setItem('weddingWishes', JSON.stringify(savedWishes));
       } catch (err) {}
 
-      // Prepare WhatsApp share link
+      // Prepare native mailto URL to kumargoudar24@gmail.com
+      const mailSubject = `Wedding Wish for Kumaresh & Danamma from ${name}`;
+      const mailBody = `Dear Kumaresh & Danamma,\n\n${message}\n\nWarm regards,\n${name}`;
+      const mailtoUrl = `mailto:kumargoudar24@gmail.com?subject=${encodeURIComponent(mailSubject)}&body=${encodeURIComponent(mailBody)}`;
+
+      // Prepare WhatsApp share link to +91 8050360048
       const encodedMsg = encodeURIComponent(
         `Warm Wishes for Kumaresh & Danamma 💍✨\n\nFrom: ${name}\nWish: ${message}`
       );
       if (whatsappWishBtn) {
-        whatsappWishBtn.href = `https://api.whatsapp.com/send?text=${encodedMsg}`;
+        whatsappWishBtn.href = `https://api.whatsapp.com/send?phone=918050360048&text=${encodedMsg}`;
       }
 
+      // Launch native email client directly
+      window.location.href = mailtoUrl;
+
       if (wishSuccessText) {
-        wishSuccessText.textContent = `Thank you ${name}! Your blessing has been recorded for Kumaresh & Danamma.`;
+        wishSuccessText.textContent = `Thank you ${name}! Your email client has been launched with your wish for Kumaresh & Danamma.`;
       }
 
       wishesForm.style.display = 'none';

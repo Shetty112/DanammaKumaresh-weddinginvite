@@ -5,11 +5,10 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   /* --------------------------------------------------------------------------
-     AUTOMATIC AUDIO PLAYBACK ENGINE & CONTROL HANDLER
+     AUTOMATIC AUDIO PLAYBACK ENGINE & CONTROL HANDLER (iOS & ANDROID)
      -------------------------------------------------------------------------- */
   const weddingAudio = document.getElementById('weddingAudio');
   const audioToggleBtn = document.getElementById('audioToggleBtn');
-  let audioStarted = false;
 
   function updateAudioUI(isPlaying) {
     if (!audioToggleBtn) return;
@@ -26,29 +25,42 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  function playAudio() {
-    if (!weddingAudio || audioStarted) return;
+  function unlockAndPlayAudio() {
+    if (!weddingAudio) return;
 
     weddingAudio.muted = false;
     weddingAudio.volume = 1.0;
 
+    // Web Audio API context resume for iOS WebKit Safari
     const AudioCtx = window.AudioContext || window.webkitAudioContext;
     if (AudioCtx) {
       try {
-        const ctx = new AudioCtx();
-        if (ctx.state === 'suspended') {
-          ctx.resume();
+        if (!window.globalAudioCtx) {
+          window.globalAudioCtx = new AudioCtx();
+        }
+        if (window.globalAudioCtx.state === 'suspended') {
+          window.globalAudioCtx.resume();
         }
       } catch (err) {}
     }
 
-    const playPromise = weddingAudio.play();
-    if (playPromise !== undefined) {
-      playPromise.then(() => {
-        audioStarted = true;
+    if (weddingAudio.readyState === 0) {
+      weddingAudio.load();
+    }
+
+    const promise = weddingAudio.play();
+    if (promise !== undefined) {
+      promise.then(() => {
         updateAudioUI(true);
-      }).catch(() => {
-        updateAudioUI(false);
+      }).catch((err) => {
+        // iOS Safari fallback: play muted then unmute
+        weddingAudio.muted = true;
+        weddingAudio.play().then(() => {
+          weddingAudio.muted = false;
+          updateAudioUI(true);
+        }).catch(() => {
+          updateAudioUI(false);
+        });
       });
     }
   }
@@ -56,11 +68,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function toggleAudio() {
     if (!weddingAudio) return;
     if (weddingAudio.paused) {
-      weddingAudio.muted = false;
-      weddingAudio.play().then(() => {
-        audioStarted = true;
-        updateAudioUI(true);
-      });
+      unlockAndPlayAudio();
     } else {
       weddingAudio.pause();
       updateAudioUI(false);
@@ -68,18 +76,27 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if (audioToggleBtn) {
-    audioToggleBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      toggleAudio();
+    ['click', 'touchstart'].forEach((evt) => {
+      audioToggleBtn.addEventListener(evt, (e) => {
+        e.stopPropagation();
+        toggleAudio();
+      }, { passive: false });
     });
   }
 
-  // Attempt instant autoplay on website open and all user interaction vectors
-  playAudio();
-  window.addEventListener('load', playAudio);
-  ['click', 'touchstart', 'touchend', 'pointerdown', 'mousemove', 'scroll', 'keydown'].forEach((evtName) => {
-    window.addEventListener(evtName, playAudio, { passive: true });
-    document.addEventListener(evtName, playAudio, { passive: true });
+  // Attempt initial playback & listen to user gesture vectors (essential for iOS Safari)
+  unlockAndPlayAudio();
+  window.addEventListener('load', unlockAndPlayAudio);
+
+  const handleUserGesture = () => {
+    if (weddingAudio && weddingAudio.paused) {
+      unlockAndPlayAudio();
+    }
+  };
+
+  ['touchstart', 'touchend', 'click', 'pointerdown', 'keydown'].forEach((evtName) => {
+    window.addEventListener(evtName, handleUserGesture, { passive: false });
+    document.addEventListener(evtName, handleUserGesture, { passive: false });
   });
 
   /* --------------------------------------------------------------------------
@@ -93,14 +110,14 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     };
 
-    // Auto dismiss and slide away after 1 second
     const glanceTimer = setTimeout(dismissGlance, 1000);
 
-    // Instant dismiss on click/tap
-    glanceOverlay.addEventListener('click', () => {
-      clearTimeout(glanceTimer);
-      dismissGlance();
-      playAudio();
+    ['click', 'touchstart'].forEach((evt) => {
+      glanceOverlay.addEventListener(evt, () => {
+        clearTimeout(glanceTimer);
+        dismissGlance();
+        unlockAndPlayAudio();
+      }, { passive: false });
     });
   }
 
@@ -111,16 +128,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const openingOverlay = document.getElementById('openingOverlay');
 
   if (openInviteBtn && openingOverlay) {
-    openInviteBtn.addEventListener('click', () => {
+    const handleOpen = (e) => {
       openingOverlay.classList.add('opened');
       document.body.style.overflow = '';
-      playAudio();
+      unlockAndPlayAudio();
       
       const heroEl = document.getElementById('hero');
       if (heroEl) {
         heroEl.scrollIntoView({ behavior: 'smooth' });
       }
-    });
+    };
+
+    openInviteBtn.addEventListener('click', handleOpen);
+    openInviteBtn.addEventListener('touchstart', handleOpen, { passive: false });
   }
 
 

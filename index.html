@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="Wedding Invitation for Kumaresh & Danamma — December 18, 2026. Join us in celebrating our sacred union.">
+  <title>Kumaresh & Danamma — Digital Wedding Invitation</title>
+  
+  <!-- Relative CSS Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💍</text></svg>">
+</head>
+<body>
+
+  <!-- Background Audio Element -->
+  <audio id="weddingAudio" autoplay loop preload="auto">
+    <source src="audio/wedding-music.mpeg" type="audio/mpeg">
+    <source src="audio/wedding-music.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- Floating Audio Control Toggle Button -->
+  <button id="audioToggleBtn" class="audio-toggle-btn" aria-label="Toggle Background Music" title="Play/Pause Background Music">
+    <span class="audio-icon playing">🎵</span>
+    <span class="audio-icon muted hidden">🔇</span>
+    <div class="audio-pulse-ring"></div>
+  </button>
+
+  <!-- Gentle Falling Floral Petals Canvas -->
+  <canvas id="petalCanvas"></canvas>
+
+  <!-- ==========================================================================
+       INITIAL 3.5-SECOND GLANCE SPLASH OVERLAY
+       ========================================================================== -->
+  <div class="glance-overlay" id="glanceOverlay">
+    <div class="glance-content">
+      <div class="glance-monogram font-serif">K & D</div>
+      <div class="glance-line">And so, our journey begins...</div>
+      <div class="glance-sparkle">✨</div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       SECTION 1 — OPENING ENVELOPE / CARRIER OVERLAY (OPEN INVITATION)
+       ========================================================================== -->
+  <div class="opening-overlay" id="openingOverlay">
+    <!-- Fairy String Lights -->
+    <div class="fairy-string-lights">
+      <div class="fairy-bulb"></div>
+      <div class="fairy-bulb"></div>
+      <div class="fairy-bulb"></div>
+      <div class="fairy-bulb"></div>
+      <div class="fairy-bulb"></div>
+      <div class="fairy-bulb"></div>
+      <div class="fairy-bulb"></div>
+      <div class="fairy-bulb"></div>
+    </div>
+
+    <div class="opening-card-container">
+      <!-- Floral Corner Flourish SVG Vectors -->
+      <svg class="corner-flourish-svg tl" viewBox="0 0 100 100"><path d="M10,10 Q50,10 50,50 Q10,50 10,10 Z M20,20 C35,20 40,35 40,40 C25,40 20,25 20,20 Z"/></svg>
+      <svg class="corner-flourish-svg tr" viewBox="0 0 100 100"><path d="M10,10 Q50,10 50,50 Q10,50 10,10 Z M20,20 C35,20 40,35 40,40 C25,40 20,25 20,20 Z"/></svg>
+      <svg class="corner-flourish-svg bl" viewBox="0 0 100 100"><path d="M10,10 Q50,10 50,50 Q10,50 10,10 Z M20,20 C35,20 40,35 40,40 C25,40 20,25 20,20 Z"/></svg>
+      <svg class="corner-flourish-svg br" viewBox="0 0 100 100"><path d="M10,10 Q50,10 50,50 Q10,50 10,10 Z M20,20 C35,20 40,35 40,40 C25,40 20,25 20,20 Z"/></svg>
+
+      <!-- SACRED LORD GANESHA EMBLEM -->
+      <div class="ganesha-emblem-container">
+        <svg class="ganesha-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+          <!-- Outer Ornate Mandala Sunburst Ring -->
+          <circle cx="60" cy="60" r="56" fill="none" stroke="#D4AF37" stroke-width="1.5"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#D4AF37" stroke-width="1" stroke-dasharray="3,2"/>
+          
+          <!-- Sacred Corner Petal Rays -->
+          <path d="M60,4 L63,9 L57,9 Z M60,116 L63,111 L57,111 Z M4,60 L9,63 L9,57 Z M116,60 L111,63 L111,57 Z" fill="#D4AF37"/>
+
+          <!-- Lord Ganesha Crown (Mukut) -->
+          <path d="M60,12 L69,28 L51,28 Z" fill="#D4AF37" stroke="#F5D061" stroke-width="0.8"/>
+          <path d="M48,28 L72,28 L67,35 L53,35 Z" fill="#C5A059"/>
+          <circle cx="60" cy="9" r="3" fill="#FFD700"/>
+          <path d="M60,16 L62,23 L58,23 Z" fill="#D32F2F"/>
+
+          <!-- Broad Ganesha Ears (Karna) -->
+          <path d="M52,36 C34,26 18,42 36,58 C44,60 50,52 53,46" fill="none" stroke="#D4AF37" stroke-width="3" stroke-linecap="round"/>
+          <path d="M50,38 C38,30 26,44 40,54" fill="none" stroke="#C5A059" stroke-width="1.2"/>
+          <path d="M68,36 C86,26 102,42 84,58 C76,60 70,52 67,46" fill="none" stroke="#D4AF37" stroke-width="3" stroke-linecap="round"/>
+          <path d="M70,38 C82,30 94,44 80,54" fill="none" stroke="#C5A059" stroke-width="1.2"/>
+
+          <!-- Sacred Tilak / Trishul on Forehead -->
+          <path d="M57,37 L63,37 L60,45 Z" fill="#D32F2F"/>
+          <line x1="53" y1="38" x2="67" y2="38" stroke="#FFD700" stroke-width="1.5"/>
+          <circle cx="60" cy="34" r="2" fill="#FFD700"/>
+
+          <!-- Face & Vakratunda (Graceful Curved Trunk) -->
+          <path d="M54,39 Q60,37 66,39 Q67,48 64,57 Q60,74 48,76 Q40,77 40,69 Q40,63 50,65 Q56,66 57,60 Q59,52 54,46" fill="none" stroke="#D4AF37" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+          <!-- Single Tusk (Ekadanta) -->
+          <path d="M65,48 L72,50" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"/>
+
+          <!-- Modak / Laddu held at trunk tip -->
+          <path d="M49,65 C45,63 45,69 49,69 C53,69 53,63 49,65 Z" fill="#FFD700" stroke="#D4AF37" stroke-width="0.8"/>
+
+          <!-- Neck Ornaments & Lotus Base -->
+          <path d="M46,82 C55,86 65,86 74,82" stroke="#D4AF37" stroke-width="2" fill="none"/>
+          <path d="M42,88 Q60,82 78,88 Q60,96 42,88 Z" fill="#D4AF37" opacity="0.85"/>
+          <path d="M36,96 Q60,88 84,96 Q60,104 36,96 Z" fill="#C5A059" opacity="0.7"/>
+        </svg>
+        <div class="shloka-text">|| ॐ श्री गणेशाय नमः ||</div>
+      </div>
+
+
+
+      <span class="opening-eyebrow">WE ARE GETTING MARRIED</span>
+      <h1 class="opening-title font-serif">Kumaresh & Danamma</h1>
+      <div class="opening-date">FRIDAY, DECEMBER 18, 2026</div>
+
+      <div class="ornament-divider" style="margin: 18px 0;">
+        <div class="line"></div>
+        <svg viewBox="0 0 24 24" width="20" height="20"><path d="M12,2L15,9L22,12L15,15L12,22L9,15L2,12L9,9L12,2Z" fill="#D4AF37"/></svg>
+        <div class="line"></div>
+      </div>
+
+      <button id="openInviteBtn" class="btn-open-invite">
+        <span>OPEN INVITATION</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- MOBILE CONTAINER CANVAS -->
+  <div class="mobile-app-wrapper" id="mainWrapper">
+
+    <!-- ==========================================================================
+         SECTION 1 — HERO / TITLE BANNERS
+         ========================================================================== -->
+    <header class="hero-section" id="hero">
+      <!-- Fairy String Lights -->
+      <div class="fairy-string-lights">
+        <div class="fairy-bulb"></div>
+        <div class="fairy-bulb"></div>
+        <div class="fairy-bulb"></div>
+        <div class="fairy-bulb"></div>
+        <div class="fairy-bulb"></div>
+        <div class="fairy-bulb"></div>
+        <div class="fairy-bulb"></div>
+        <div class="fairy-bulb"></div>
+      </div>
+
+      <!-- Mandala Decorative Vector -->
+      <svg class="hero-mandala-bg" viewBox="0 0 200 200">
+        <circle cx="100" cy="100" r="90" fill="none" stroke="#D4AF37" stroke-width="1" stroke-dasharray="4,4"/>
+        <circle cx="100" cy="100" r="70" fill="none" stroke="#D4AF37" stroke-width="1"/>
+        <path d="M100,10 L110,40 L140,50 L110,60 L100,90 L90,60 L60,50 L90,40 Z" fill="none" stroke="#D4AF37" stroke-width="1.5"/>
+        <path d="M100,110 L110,140 L140,150 L110,160 L100,190 L90,160 L60,150 L90,140 Z" fill="none" stroke="#D4AF37" stroke-width="1.5"/>
+      </svg>
+
+      <!-- SACRED LORD GANESHA HERO BLESSING -->
+      <div class="ganesha-emblem-container" style="margin-bottom: 8px;">
+        <svg class="ganesha-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" style="width: 52px; height: 52px;">
+          <!-- Outer Ornate Mandala Sunburst Ring -->
+          <circle cx="60" cy="60" r="56" fill="none" stroke="#D4AF37" stroke-width="1.5"/>
+          <circle cx="60" cy="60" r="50" fill="none" stroke="#D4AF37" stroke-width="1" stroke-dasharray="3,2"/>
+          
+          <!-- Sacred Corner Petal Rays -->
+          <path d="M60,4 L63,9 L57,9 Z M60,116 L63,111 L57,111 Z M4,60 L9,63 L9,57 Z M116,60 L111,63 L111,57 Z" fill="#D4AF37"/>
+
+          <!-- Lord Ganesha Crown (Mukut) -->
+          <path d="M60,12 L69,28 L51,28 Z" fill="#D4AF37" stroke="#F5D061" stroke-width="0.8"/>
+          <path d="M48,28 L72,28 L67,35 L53,35 Z" fill="#C5A059"/>
+          <circle cx="60" cy="9" r="3" fill="#FFD700"/>
+          <path d="M60,16 L62,23 L58,23 Z" fill="#D32F2F"/>
+
+          <!-- Broad Ganesha Ears (Karna) -->
+          <path d="M52,36 C34,26 18,42 36,58 C44,60 50,52 53,46" fill="none" stroke="#D4AF37" stroke-width="3" stroke-linecap="round"/>
+          <path d="M50,38 C38,30 26,44 40,54" fill="none" stroke="#C5A059" stroke-width="1.2"/>
+          <path d="M68,36 C86,26 102,42 84,58 C76,60 70,52 67,46" fill="none" stroke="#D4AF37" stroke-width="3" stroke-linecap="round"/>
+          <path d="M70,38 C82,30 94,44 80,54" fill="none" stroke="#C5A059" stroke-width="1.2"/>
+
+          <!-- Sacred Tilak / Trishul on Forehead -->
+          <path d="M57,37 L63,37 L60,45 Z" fill="#D32F2F"/>
+          <line x1="53" y1="38" x2="67" y2="38" stroke="#FFD700" stroke-width="1.5"/>
+          <circle cx="60" cy="34" r="2" fill="#FFD700"/>
+
+          <!-- Face & Vakratunda (Graceful Curved Trunk) -->
+          <path d="M54,39 Q60,37 66,39 Q67,48 64,57 Q60,74 48,76 Q40,77 40,69 Q40,63 50,65 Q56,66 57,60 Q59,52 54,46" fill="none" stroke="#D4AF37" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+          <!-- Single Tusk (Ekadanta) -->
+          <path d="M65,48 L72,50" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"/>
+
+          <!-- Modak / Laddu held at trunk tip -->
+          <path d="M49,65 C45,63 45,69 49,69 C53,69 53,63 49,65 Z" fill="#FFD700" stroke="#D4AF37" stroke-width="0.8"/>
+
+          <!-- Neck Ornaments & Lotus Base -->
+          <path d="M46,82 C55,86 65,86 74,82" stroke="#D4AF37" stroke-width="2" fill="none"/>
+          <path d="M42,88 Q60,82 78,88 Q60,96 42,88 Z" fill="#D4AF37" opacity="0.85"/>
+          <path d="M36,96 Q60,88 84,96 Q60,104 36,96 Z" fill="#C5A059" opacity="0.7"/>
+        </svg>
+        <div class="shloka-text" style="font-size: 0.75rem;">|| ॐ श्री गणेशाय नमः ||</div>
+      </div>
+
+      <!-- ROYAL KD WEDDING MONOGRAM BADGE -->
+      <div class="hero-monogram-badge" style="margin-bottom: 8px;">
+        <svg class="kd-logo-svg" viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg" style="width: 72px; height: 72px;">
+          <defs>
+            <radialGradient id="sealGradHero" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#4A0E17"/>
+              <stop offset="85%" stop-color="#2B080D"/>
+              <stop offset="100%" stop-color="#180406"/>
+            </radialGradient>
+            <linearGradient id="goldGradHero" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#FFE082"/>
+              <stop offset="50%" stop-color="#D4AF37"/>
+              <stop offset="100%" stop-color="#997A15"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Outer Glowing Gold Frame -->
+          <circle cx="70" cy="70" r="66" fill="url(#sealGradHero)" stroke="url(#goldGradHero)" stroke-width="3"/>
+          <circle cx="70" cy="70" r="59" fill="none" stroke="url(#goldGradHero)" stroke-width="1.2" stroke-dasharray="4,2"/>
+          <circle cx="70" cy="70" r="54" fill="none" stroke="#D4AF37" stroke-width="0.8"/>
+
+          <!-- Ornate Royal Crown Crest Top -->
+          <path d="M70,16 L76,24 L64,24 Z" fill="url(#goldGradHero)"/>
+          <path d="M62,24 L78,24 L75,28 L65,28 Z" fill="url(#goldGradHero)"/>
+          <circle cx="70" cy="14" r="2.5" fill="#FFE082"/>
+
+          <!-- 8 Sacred Floral Studs along Ring -->
+          <circle cx="70" cy="10" r="2.5" fill="url(#goldGradHero)"/>
+          <circle cx="70" cy="130" r="2.5" fill="url(#goldGradHero)"/>
+          <circle cx="10" cy="70" r="2.5" fill="url(#goldGradHero)"/>
+          <circle cx="130" cy="70" r="2.5" fill="url(#goldGradHero)"/>
+
+          <!-- Interlocking Monogram Typography: K & D -->
+          <g fill="url(#goldGradHero)" text-anchor="middle" font-family="'Cormorant Garamond', Georgia, serif">
+            <!-- Letter K -->
+            <text x="49" y="80" font-size="44" font-weight="700" letter-spacing="-2">K</text>
+            <!-- Ampersand -->
+            <text x="70" y="68" font-size="22" font-family="'Alex Brush', cursive" fill="#FFE082">&amp;</text>
+            <!-- Letter D -->
+            <text x="91" y="80" font-size="44" font-weight="700" letter-spacing="-2">D</text>
+          </g>
+
+          <!-- Elegant Bottom Floral Flourish -->
+          <path d="M52,94 Q70,88 88,94 M58,98 Q70,94 82,98" stroke="url(#goldGradHero)" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+        </svg>
+      </div>
+
+      <span class="hero-eyebrow">WE ARE GETTING MARRIED</span>
+      
+      <h1 class="hero-title font-serif">
+        Kumaresh
+        <span class="hero-ampersand">&</span>
+        Danamma
+      </h1>
+
+      <div class="hero-date-box">
+        <span>FRIDAY • DECEMBER 18, 2026</span>
+      </div>
+
+      <!-- INTERESTING & COMPACT SCROLL ACTION BUTTON -->
+      <div class="hero-scroll-container">
+        <a href="#intro" class="hero-scroll-btn" aria-label="Scroll to begin">
+          <span>SCROLL TO BEGIN</span>
+          <svg class="scroll-bounce-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 9l-7 7-7-7"/></svg>
+        </a>
+      </div>
+    </header>
+
+    <main>
+
+      <!-- ==========================================================================
+           SECTION 2 — WEDDING INTRODUCTION
+           ========================================================================== -->
+      <section class="intro-section" id="intro">
+        <div class="scroll-reveal">
+          <span class="heading-eyebrow">OUR CELEBRATION</span>
+          <h2 class="heading-primary">OUR WEDDING HAS BEGUN</h2>
+
+          <div style="font-family: var(--font-serif); font-size: 1.4rem; color: var(--wine-primary); margin-top: 6px;">
+            Kumaresh & Danamma
+          </div>
+          <div style="font-family: var(--font-sans); font-size: 0.75rem; letter-spacing: 0.2em; color: var(--gold-soft); margin-top: 4px;">
+            DECEMBER 18, 2026
+          </div>
+          
+          <div class="ornament-divider">
+            <div class="line"></div>
+            <svg viewBox="0 0 24 24"><path d="M12,2L15,9L22,12L15,15L12,22L9,15L2,12L9,9L12,2Z"/></svg>
+            <div class="line"></div>
+          </div>
+
+          <p class="intro-lead">
+            Together with our families, we eagerly await your presence as we celebrate this joyous occasion and become one family.
+          </p>
+
+          <a href="#timeline" class="btn-gold-outline">
+            <span>VIEW WEDDING TIMELINE</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           SECTION 3 — THE COUPLE (WITH SUBTLE INTERTWINED WEDDING RINGS ACCENT)
+           ========================================================================== -->
+      <section class="couple-section" id="couple">
+        <div class="couple-header scroll-reveal">
+          <!-- Minimal Wedding Rings SVG Line Art Accent -->
+          <svg class="wedding-icon-accent" viewBox="0 0 100 100">
+            <circle cx="40" cy="50" r="22" fill="none" stroke="#C5A059" stroke-width="3"/>
+            <circle cx="60" cy="50" r="22" fill="none" stroke="#C5A059" stroke-width="3"/>
+            <path d="M50,28 L53,34 L47,34 Z" fill="#D4AF37"/>
+          </svg>
+          
+          <span class="heading-eyebrow">THE BRIDE & GROOM</span>
+          <h2 class="heading-primary">THE COUPLE</h2>
+          <p class="subheading">DIFFERENT STORIES, ONE BEAUTIFUL FOREVER</p>
+        </div>
+
+        <div class="couple-cards-container">
+          <!-- Groom Card -->
+          <div class="couple-mobile-card scroll-reveal">
+            <div class="couple-monogram-container">
+              <svg class="couple-monogram-svg" viewBox="0 0 140 140" width="120" height="120" aria-label="Groom Monogram K">
+                <defs>
+                  <linearGradient id="goldMonogramGradK" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#FFE599"/>
+                    <stop offset="30%" stop-color="#D4AF37"/>
+                    <stop offset="70%" stop-color="#AA7C11"/>
+                    <stop offset="100%" stop-color="#F3E5AB"/>
+                  </linearGradient>
+                  <radialGradient id="bgMonogramGradK" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#FFFDF9"/>
+                    <stop offset="60%" stop-color="#F5EFE4"/>
+                    <stop offset="100%" stop-color="#EFE4D2"/>
+                  </radialGradient>
+                  <filter id="goldGlowK" x="-20%" y="-20%" width="140%" height="140%">
+                    <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#D4AF37" flood-opacity="0.4"/>
+                  </filter>
+                </defs>
+                <circle cx="70" cy="70" r="66" fill="none" stroke="url(#goldMonogramGradK)" stroke-width="1" stroke-dasharray="3, 4" opacity="0.8"/>
+                <circle cx="70" cy="70" r="61" fill="none" stroke="url(#goldMonogramGradK)" stroke-width="2.5"/>
+                <circle cx="70" cy="70" r="56" fill="url(#bgMonogramGradK)" stroke="url(#goldMonogramGradK)" stroke-width="1.5"/>
+                <circle cx="70" cy="70" r="50" fill="none" stroke="#D4AF37" stroke-width="1" stroke-dasharray="2, 3" opacity="0.6"/>
+                <g transform="translate(56, 26) scale(0.65)" fill="url(#goldMonogramGradK)">
+                  <path d="M 5,20 L 8,8 L 17,14 L 21,4 L 25,14 L 34,8 L 37,20 Z" filter="url(#goldGlowK)"/>
+                  <circle cx="8" cy="7" r="1.5" />
+                  <circle cx="21" cy="3" r="1.8" />
+                  <circle cx="34" cy="7" r="1.5" />
+                </g>
+                <text x="70" y="86" text-anchor="middle" font-family="'Cormorant Garamond', 'Georgia', serif" font-size="44" font-weight="700" fill="#701D2B" filter="url(#goldGlowK)" letter-spacing="-1">K</text>
+                <path d="M52,102 Q70,97 88,102 M58,105 Q70,101 82,105" stroke="url(#goldMonogramGradK)" stroke-width="1.2" fill="none" stroke-linecap="round" opacity="0.95"/>
+                <circle cx="70" cy="99" r="2" fill="url(#goldMonogramGradK)"/>
+              </svg>
+            </div>
+            <span class="couple-role">THE GROOM</span>
+            <h3 class="couple-name">KUMARESH</h3>
+            <p class="couple-quote">
+              “Dreaming of forever and grateful for every blessing that led to this moment.”
+            </p>
+          </div>
+
+          <!-- Couple Card (Center) -->
+          <div class="couple-mobile-card couple-center-card scroll-reveal">
+            <div class="couple-photo-frame">
+              <img src="images/couple/couple-portrait.png" alt="Kumaresh and Danamma" class="couple-photo-img" />
+            </div>
+            <span class="couple-role">THE COUPLE</span>
+            <h3 class="couple-name" style="font-size: 1.8rem; margin-top: 6px;">KUMARESH & DANAMMA</h3>
+            <p class="couple-quote">
+              “Two souls with but a single thought, two hearts that beat as one.”
+            </p>
+          </div>
+
+          <!-- Bride Card -->
+          <div class="couple-mobile-card scroll-reveal">
+            <div class="couple-monogram-container">
+              <svg class="couple-monogram-svg" viewBox="0 0 140 140" width="120" height="120" aria-label="Bride Monogram D">
+                <defs>
+                  <linearGradient id="goldMonogramGradD" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#FFE599"/>
+                    <stop offset="30%" stop-color="#D4AF37"/>
+                    <stop offset="70%" stop-color="#AA7C11"/>
+                    <stop offset="100%" stop-color="#F3E5AB"/>
+                  </linearGradient>
+                  <radialGradient id="bgMonogramGradD" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#FFFDF9"/>
+                    <stop offset="60%" stop-color="#F5EFE4"/>
+                    <stop offset="100%" stop-color="#EFE4D2"/>
+                  </radialGradient>
+                  <filter id="goldGlowD" x="-20%" y="-20%" width="140%" height="140%">
+                    <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#D4AF37" flood-opacity="0.4"/>
+                  </filter>
+                </defs>
+                <circle cx="70" cy="70" r="66" fill="none" stroke="url(#goldMonogramGradD)" stroke-width="1" stroke-dasharray="3, 4" opacity="0.8"/>
+                <circle cx="70" cy="70" r="61" fill="none" stroke="url(#goldMonogramGradD)" stroke-width="2.5"/>
+                <circle cx="70" cy="70" r="56" fill="url(#bgMonogramGradD)" stroke="url(#goldMonogramGradD)" stroke-width="1.5"/>
+                <circle cx="70" cy="70" r="50" fill="none" stroke="#D4AF37" stroke-width="1" stroke-dasharray="2, 3" opacity="0.6"/>
+                <g transform="translate(56, 26) scale(0.65)" fill="url(#goldMonogramGradD)">
+                  <path d="M 5,20 L 8,8 L 17,14 L 21,4 L 25,14 L 34,8 L 37,20 Z" filter="url(#goldGlowD)"/>
+                  <circle cx="8" cy="7" r="1.5" />
+                  <circle cx="21" cy="3" r="1.8" />
+                  <circle cx="34" cy="7" r="1.5" />
+                </g>
+                <text x="70" y="86" text-anchor="middle" font-family="'Cormorant Garamond', 'Georgia', serif" font-size="44" font-weight="700" fill="#701D2B" filter="url(#goldGlowD)" letter-spacing="-1">D</text>
+                <path d="M52,102 Q70,97 88,102 M58,105 Q70,101 82,105" stroke="url(#goldMonogramGradD)" stroke-width="1.2" fill="none" stroke-linecap="round" opacity="0.95"/>
+                <circle cx="70" cy="99" r="2" fill="url(#goldMonogramGradD)"/>
+              </svg>
+            </div>
+            <span class="couple-role">THE BRIDE</span>
+            <h3 class="couple-name">DANAMMA</h3>
+            <p class="couple-quote">
+              “Ready to begin a beautiful journey filled with love, laughter, and endless memories.”
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           COUNTDOWN SECTION
+           ========================================================================== -->
+      <section class="countdown-section">
+        <div class="scroll-reveal">
+          <span class="heading-eyebrow" style="color: var(--gold-light);">COUNTING DOWN TO THE MUHURTHAM</span>
+          <h2 class="countdown-title">UNTIL WE SAY FOREVER</h2>
+
+          <div class="countdown-grid">
+            <div class="countdown-item">
+              <div class="countdown-number" id="days">00</div>
+              <span class="countdown-label">DAYS</span>
+            </div>
+            <div class="countdown-item">
+              <div class="countdown-number" id="hours">00</div>
+              <span class="countdown-label">HOURS</span>
+            </div>
+            <div class="countdown-item">
+              <div class="countdown-number" id="minutes">00</div>
+              <span class="countdown-label">MINS</span>
+            </div>
+            <div class="countdown-item">
+              <div class="countdown-number" id="seconds">00</div>
+              <span class="countdown-label">SECS</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           SECTION 4 — CHERISHED MOMENTS
+           ========================================================================== -->
+      <section class="gallery-section" id="gallery">
+        <div class="gallery-header scroll-reveal">
+          <span class="heading-eyebrow">OUR JOURNEY</span>
+          <h2 class="heading-primary">CHERISHED MOMENTS</h2>
+          <p class="subheading">A GLIMPSE INTO OUR BEAUTIFUL JOURNEY TOGETHER</p>
+          <div style="font-family: var(--font-sans); font-size: 0.72rem; letter-spacing: 0.25em; color: var(--gold-soft); margin-top: 6px; font-weight: 600;">
+            PHOTOS 15
+          </div>
+        </div>
+
+        <div class="blessings-card-grid">
+          <div class="blessing-card scroll-reveal">
+            <div class="blessing-card-icon">🪷</div>
+            <h3 class="blessing-card-title">Love & Harmony</h3>
+            <p class="blessing-card-text">“Where there is love, there is peace. Bound by tradition, united in heart.”</p>
+          </div>
+
+          <div class="blessing-card scroll-reveal">
+            <div class="blessing-card-icon">✨</div>
+            <h3 class="blessing-card-title">Sacred Vows</h3>
+            <p class="blessing-card-text">“Seven sacred steps together towards a lifetime of joy and togetherness.”</p>
+          </div>
+
+          <div class="blessing-card scroll-reveal">
+            <div class="blessing-card-icon">🌿</div>
+            <h3 class="blessing-card-title">Eternal Bond</h3>
+            <p class="blessing-card-text">“Two souls becoming one, guided by family warmth and divine grace.”</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           SECTION 5 — WEDDING TIMELINE
+           ========================================================================== -->
+      <section class="timeline-section" id="timeline">
+        <div class="timeline-header scroll-reveal">
+          <!-- Minimal Traditional Mandap Arch SVG Accent -->
+          <svg class="wedding-icon-accent" viewBox="0 0 100 100">
+            <path d="M20,70 L20,35 Q50,15 80,35 L80,70" fill="none" stroke="#C5A059" stroke-width="3"/>
+            <path d="M15,35 L85,35" stroke="#D4AF37" stroke-width="2"/>
+            <circle cx="50" cy="20" r="5" fill="#D4AF37"/>
+          </svg>
+
+          <span class="heading-eyebrow">ITINERARY</span>
+          <h2 class="heading-primary">SCHEDULE OF EVENTS</h2>
+          <p class="subheading">WE LOOK FORWARD TO CELEBRATING EACH PRECIOUS MOMENT WITH YOU</p>
+        </div>
+
+        <div class="timeline-container">
+          
+          <!-- EVENT 1 -->
+          <div class="timeline-event scroll-reveal">
+            <div class="timeline-node"></div>
+            <div class="event-card">
+              <div class="card-media">
+                <div class="event-image-container">
+                  <img src="images/ceremonies/canopy.jpg" alt="Wedding Canopy Ceremony" class="event-image">
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="ref-event-date">DECEMBER 14, 2026 • MONDAY</div>
+                <h3 class="ref-event-title">WEDDING CANOPY CEREMONY</h3>
+                <p class="ref-event-subtitle">Beautiful beginnings under sacred shade</p>
+                <div class="ref-info-line time-line">
+                  <svg class="ref-icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  <span>9:00 AM – 10:15 AM</span>
+                </div>
+                <div class="ref-info-line venue-line">
+                  <svg class="ref-icon-pin" viewBox="0 0 24 24" fill="#E53935"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                  <span>S K Goudar House, Almatti, Karnataka</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- EVENT 2 -->
+          <div class="timeline-event scroll-reveal">
+            <div class="timeline-node"></div>
+            <div class="event-card">
+              <div class="card-media">
+                <div class="event-image-container">
+                  <img src="images/ceremonies/mehendi.jpg" alt="Bangles & Mehendi Ceremony" class="event-image">
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="ref-event-date">DECEMBER 16, 2026 • WEDNESDAY</div>
+                <h3 class="ref-event-title">BANGLES & MEHENDI CEREMONY</h3>
+                <p class="ref-event-subtitle">Beautiful stories written in henna</p>
+                <div class="ref-info-line time-line">
+                  <svg class="ref-icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  <span>Bangles: 10:00 AM onwards • Mehendi: 5:00 PM</span>
+                </div>
+                <div class="ref-info-line venue-line">
+                  <svg class="ref-icon-pin" viewBox="0 0 24 24" fill="#E53935"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                  <span>S K Goudar House, Almatti, Karnataka</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- EVENT 3 -->
+          <div class="timeline-event scroll-reveal">
+            <div class="timeline-node"></div>
+            <div class="event-card">
+              <div class="card-media">
+                <div class="event-image-container">
+                  <img src="images/ceremonies/haldi.jpg" alt="Haldi Ceremony" class="event-image">
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="ref-event-date">DECEMBER 17, 2026 • THURSDAY</div>
+                <h3 class="ref-event-title">HALDI CEREMONY</h3>
+                <p class="ref-event-subtitle">Where traditions shine in shades of white and yellow</p>
+                <div class="ref-info-line time-line">
+                  <svg class="ref-icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  <span>9:00 AM ONWARDS</span>
+                </div>
+                <div class="ref-info-line venue-line">
+                  <svg class="ref-icon-pin" viewBox="0 0 24 24" fill="#E53935"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                  <span>S K Goudar House, Almatti, Karnataka</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- EVENT 4 -->
+          <div class="timeline-event scroll-reveal">
+            <div class="timeline-node"></div>
+            <div class="event-card">
+              <div class="card-media">
+                <div class="event-image-container">
+                  <img src="images/ceremonies/sangeet.jpg" alt="Wedding Reception & Sangeet Night" class="event-image">
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="ref-event-date">DECEMBER 17, 2026 • THURSDAY</div>
+                <h3 class="ref-event-title">WEDDING RECEPTION & SANGEET NIGHT</h3>
+                <p class="ref-event-subtitle">An evening of music, dance, and festive celebrations</p>
+                <div class="ref-info-line time-line">
+                  <svg class="ref-icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  <span>6:00 PM ONWARDS</span>
+                </div>
+                <div class="ref-info-line venue-line">
+                  <svg class="ref-icon-pin" viewBox="0 0 24 24" fill="#E53935"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                  <span>S K Goudar House, Almatti, Karnataka</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- EVENT 5 (MAIN WEDDING) -->
+          <div class="timeline-event main-wedding scroll-reveal">
+            <div class="timeline-node"></div>
+            <div class="event-card">
+              <div class="card-media">
+                <div class="event-image-container" style="border-color: var(--gold-soft);">
+                  <img src="images/ceremonies/muhurtham.jpg" alt="Muhurtham & Main Wedding Ceremony" class="event-image">
+                </div>
+              </div>
+              <div class="card-body">
+                <span class="heading-eyebrow" style="color: var(--gold-light);">MAIN CEREMONY</span>
+                <div class="ref-event-date" style="color: var(--wine-primary);">DECEMBER 18, 2026 • FRIDAY</div>
+                <h3 class="ref-event-title">MUHURTHAM & RECEPTION</h3>
+                <p class="ref-event-subtitle">A sacred bond and divine celebration for a lifetime of love</p>
+                <div class="ref-info-line time-line">
+                  <svg class="ref-icon-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  <span>Muhurtham: 9:44 AM • Reception: 12:26 PM</span>
+                </div>
+                <div class="ref-info-line venue-line">
+                  <svg class="ref-icon-pin" viewBox="0 0 24 24" fill="#E53935"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                  <span>KBJNL Samudhaya Bhavana, Almatti, Karnataka</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           SECTION 6 — VENUE
+           ========================================================================== -->
+      <section class="venue-section" id="venue">
+        <div class="venue-card-info scroll-reveal">
+          <!-- Minimal Floral Bouquet Vector Accent -->
+          <svg class="wedding-icon-accent" viewBox="0 0 100 100">
+            <circle cx="50" cy="40" r="14" fill="none" stroke="#C5A059" stroke-width="2"/>
+            <circle cx="36" cy="50" r="10" fill="none" stroke="#C5A059" stroke-width="2"/>
+            <circle cx="64" cy="50" r="10" fill="none" stroke="#C5A059" stroke-width="2"/>
+            <path d="M50,54 L50,80 M42,62 L50,70 M58,62 L50,70" stroke="#D4AF37" stroke-width="2"/>
+          </svg>
+
+          <span class="heading-eyebrow">LOCATION</span>
+          <h2 class="venue-name">KBJNL SAMUDHAYA BHAVANA</h2>
+          <p class="venue-address">
+            STATE BANK OPPOSITE, ALAMATTI D.S., VIJAYAPUR,<br>
+            NIDAGUNDI, AALAMATTI, KARNATAKA – 586201
+          </p>
+
+          <a href="https://maps.google.com/?q=KBJNL+Samudhaya+Bhavana+Almatti+Karnataka" target="_blank" rel="noopener noreferrer" class="btn-gold-filled">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
+            <span>VIEW DIRECTIONS</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           SECTION 7 — FAMILY INVITATION
+           ========================================================================== -->
+      <section class="invitation-section" id="invitation">
+        <div class="invitation-box scroll-reveal">
+          <p class="invitation-lead">With love and warm regards,</p>
+          
+          <div class="invitation-group">
+            <div class="invitation-role-title">INVITED BY</div>
+            <div class="invitation-name">SMT. RUKMEENIBAI @ SHANKARALINGAPPA GOUDAR</div>
+          </div>
+
+          <div class="ornament-divider">
+            <div class="line"></div>
+            <svg viewBox="0 0 24 24" width="20" height="20"><circle cx="12" cy="12" r="4" fill="#D4AF37"/></svg>
+            <div class="line"></div>
+          </div>
+
+          <div class="invitation-group">
+            <div class="invitation-role-title">WITH BEST COMPLIMENTS FROM</div>
+            <div class="invitation-name">SMT. CHAITRA & MURALIDHAR KOPPAL</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================================================
+           SECTION 8 — FINAL INVITATION MESSAGE
+           ========================================================================== -->
+      <section class="final-message-section">
+        <div class="scroll-reveal">
+          <!-- Subtle Traditional Diya Lamp Vector Accent -->
+          <svg class="wedding-icon-accent" viewBox="0 0 100 100" style="fill: var(--gold-accent);">
+            <path d="M25,60 C25,75 75,75 75,60 C75,52 25,52 25,60 Z" fill="#C5A059"/>
+            <path d="M50,22 C53,36 60,45 50,52 C40,45 47,36 50,22 Z" fill="#FFD700"/>
+          </svg>
+
+          <p class="intro-lead" style="color: var(--gold-light); margin-bottom: 20px;">
+            Together with our families, we eagerly await your presence as we celebrate this joyous occasion and become one family.
+          </p>
+
+          <div class="final-couple-names" style="margin-bottom: 24px;">Kumaresh & Danamma</div>
+          
+          <h2 class="final-quote">
+            “YOUR PRESENCE AND BLESSINGS ARE THE ONLY GIFT WE’RE HOPING TO UNWRAP.”
+          </h2>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- FINAL FOOTER -->
+    <footer class="footer-section">
+      <div class="footer-monogram font-serif">K & D</div>
+      <div class="footer-date">18 • 12 • 2026</div>
+      <p class="footer-tagline">With love, laughter & forever.</p>
+    </footer>
+
+  </div>
+
+  <!-- Relative JavaScript File -->
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+{
+  "name": "kumaresh-danamma-wedding-invitation",
+  "version": "1.0.0",
+  "description": "Digital Wedding Invitation for Kumaresh & Danamma - December 18, 2026",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve ."
+  }
+}

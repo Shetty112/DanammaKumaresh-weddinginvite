@@ -696,6 +696,79 @@
         </div>
       </section>
 
+      <!-- ==========================================================================
+           SECTION 9 — LEAVE YOUR BLESSINGS & SEND PRIVATE WISHES
+           ========================================================================== -->
+      <section class="blessings-wishes-section" id="wishes">
+        <div class="scroll-reveal">
+          <!-- Feather / Heart Ornament Accent -->
+          <svg class="wedding-icon-accent" viewBox="0 0 100 100" style="fill: none; stroke: var(--gold-soft); stroke-width: 2;">
+            <path d="M50,25 C30,10 15,30 50,75 C85,30 70,10 50,25 Z" fill="rgba(212,175,55,0.12)" stroke="var(--gold-soft)" stroke-width="2"/>
+            <path d="M50,38 L50,60 M42,48 L58,48" stroke="var(--wine-primary)" stroke-width="2"/>
+          </svg>
+
+          <span class="heading-eyebrow">A NOTE FOR FOREVER</span>
+          <h2 class="wishes-script-title">Leave your blessings</h2>
+          <p class="subheading" style="margin-bottom: 28px;">SEND YOUR WISHES & LOVE PRIVATELY TO THE COUPLE</p>
+
+          <div class="wishes-card-container">
+            <form id="wishesForm" class="wishes-form">
+              <div class="form-group">
+                <label for="guestName" class="form-label">YOUR NAME</label>
+                <input 
+                  type="text" 
+                  id="guestName" 
+                  name="guestName" 
+                  placeholder="Your name" 
+                  class="wish-input" 
+                  required 
+                  autocomplete="name"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="guestMessage" class="form-label">YOUR MESSAGE</label>
+                <textarea 
+                  id="guestMessage" 
+                  name="guestMessage" 
+                  placeholder="Write your wish for Kumaresh & Danamma..." 
+                  class="wish-textarea" 
+                  rows="4" 
+                  required
+                ></textarea>
+              </div>
+
+              <button type="submit" class="btn-send-wish">
+                <span>SEND PRIVATE WISHES</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+              </button>
+
+              <p class="wish-subtext">
+                Your message will be delivered privately to the couple.
+              </p>
+            </form>
+
+            <div id="wishSuccessState" class="wish-success-box" style="display: none;">
+              <div class="wish-success-icon">✨ 💖 ✨</div>
+              <h3 class="wish-success-title">Thank You!</h3>
+              <p id="wishSuccessText" class="wish-success-message">
+                Your blessing has been sent to Kumaresh & Danamma.
+              </p>
+              <div class="wish-action-buttons">
+                <a id="whatsappWishBtn" href="#" target="_blank" rel="noopener noreferrer" class="btn-whatsapp-share">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12.012 2c-5.506 0-9.989 4.478-9.99 9.984 0 1.764.459 3.486 1.332 5.006l-1.417 5.176 5.297-1.39c1.464.798 3.116 1.218 4.774 1.219h.004c5.507 0 9.99-4.479 9.99-9.986 0-2.668-1.038-5.176-2.925-7.062a9.924 9.924 0 0 0-7.055-2.947zm5.952 14.152c-.252.71-1.465 1.353-2.023 1.442-.516.082-1.189.117-3.418-.806-2.854-1.182-4.693-4.084-4.835-4.275-.141-.19-1.155-1.538-1.155-2.932 0-1.395.733-2.079.992-2.361.258-.283.565-.353.754-.353.189 0 .378.002.542.01.176.009.412-.067.643.488.237.568.803 1.956.873 2.097.071.142.119.308.024.498-.095.189-.142.308-.283.473-.142.165-.298.369-.425.496-.142.142-.29.297-.124.58.165.283.734 1.211 1.574 1.96 1.08 0.962 1.988 1.26 2.272 1.402.283.142.449.118.614-.071.165-.189.708-.826.897-1.11.189-.283.378-.236.637-.142.26.094 1.65.778 1.933.92.283.142.472.213.543.33.07.118.07 1.085-.182 1.795z"/></svg>
+                  <span>Share on WhatsApp</span>
+                </a>
+                <button type="button" id="sendAnotherWishBtn" class="btn-another-wish">
+                  <span>Send another wish</span>
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
     </main>
 
     <!-- FINAL FOOTER -->

@@ -284,4 +284,63 @@ document.addEventListener('DOMContentLoaded', () => {
     animateFlowers();
   }
 
+  /* --------------------------------------------------------------------------
+     5. LEAVE YOUR BLESSINGS & SEND PRIVATE WISHES HANDLER
+     -------------------------------------------------------------------------- */
+  const wishesForm = document.getElementById('wishesForm');
+  const wishSuccessState = document.getElementById('wishSuccessState');
+  const wishSuccessText = document.getElementById('wishSuccessText');
+  const whatsappWishBtn = document.getElementById('whatsappWishBtn');
+  const sendAnotherWishBtn = document.getElementById('sendAnotherWishBtn');
+
+  if (wishesForm) {
+    wishesForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const guestNameInput = document.getElementById('guestName');
+      const guestMessageInput = document.getElementById('guestMessage');
+
+      const name = guestNameInput ? guestNameInput.value.trim() : '';
+      const message = guestMessageInput ? guestMessageInput.value.trim() : '';
+
+      if (!name || !message) return;
+
+      // Save to localStorage
+      try {
+        const savedWishes = JSON.parse(localStorage.getItem('weddingWishes') || '[]');
+        savedWishes.push({ name, message, timestamp: new Date().toISOString() });
+        localStorage.setItem('weddingWishes', JSON.stringify(savedWishes));
+      } catch (err) {}
+
+      // Prepare WhatsApp share link
+      const encodedMsg = encodeURIComponent(
+        `Warm Wishes for Kumaresh & Danamma 💍✨\n\nFrom: ${name}\nWish: ${message}`
+      );
+      if (whatsappWishBtn) {
+        whatsappWishBtn.href = `https://api.whatsapp.com/send?text=${encodedMsg}`;
+      }
+
+      if (wishSuccessText) {
+        wishSuccessText.textContent = `Thank you ${name}! Your blessing has been recorded for Kumaresh & Danamma.`;
+      }
+
+      wishesForm.style.display = 'none';
+      if (wishSuccessState) {
+        wishSuccessState.style.display = 'block';
+      }
+    });
+  }
+
+  if (sendAnotherWishBtn) {
+    sendAnotherWishBtn.addEventListener('click', () => {
+      if (wishesForm) {
+        wishesForm.reset();
+        wishesForm.style.display = 'flex';
+      }
+      if (wishSuccessState) {
+        wishSuccessState.style.display = 'none';
+      }
+    });
+  }
+
 });
